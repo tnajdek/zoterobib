@@ -11,6 +11,7 @@ import { installMockedXHR, uninstallMockedXHR, installUnhandledRequestHandler } 
 import Container from '../src/js/components/container';
 import { renderWithProviders } from './utils/render';
 import modernLanguageAssociationStyle from './fixtures/modern-language-association.xml';
+import chicagoNotesStyle from './fixtures/chicago-notes.xml';
 import schema from './fixtures/schema.json';
 import localStorage100Items from './fixtures/local-storage-100-items.json';
 import natureStyle from './fixtures/nature.xml';
@@ -55,11 +56,19 @@ describe('Citations', () => {
 				});
 			}),
 		);
+		server.use(
+			http.get('https://www.zotero.org/styles/chicago-notes', () => {
+				return HttpResponse.text(chicagoNotesStyle, {
+					headers: { 'Content-Type': 'application/vnd.citationstyles.style+xml' },
+				});
+			}),
+		);
 		localStorage.setItem(
 			'zotero-bib-items',
 			JSON.stringify(localStorage100Items.slice(0, 5)) // improve performance by using a small slice
 		);
 		localStorage.setItem('zotero-bib-title', 'hello world');
+		// localStorage.setItem('zotero-bib-citation-style', 'modern-language-association');
 	});
 
 	afterEach(() => {
@@ -238,5 +247,22 @@ describe('Citations', () => {
 		await user.click(copyURL);
 		expect(copy).toHaveBeenCalledWith('http://localhost/d3b2fbdeadff4a00aecd048451a962b9');
 		expect(link).toHaveAttribute('href', 'http://localhost/d3b2fbdeadff4a00aecd048451a962b9');
+	});
+
+	test('Renders entries as citations if style does not support bibliography', async () => {
+		localStorage.setItem('zotero-bib-citation-style', 'chicago-notes');
+		renderWithProviders(<Container />);
+
+		const bibliography = await screen.findByRole("list", { name: "Bibliography" }, { timeout: 3000 });
+		expect(bibliography).toBeInTheDocument();
+		const citations = getAllByRole(bibliography, 'listitem', { name: 'Citation' })
+		expect(citations).toHaveLength(5);
+		expect(citations[0]).toHaveTextContent("“Formate Assay in Body Fluids: Application in Methanol Poisoning,”");
+
+		// simulate switching a tab, check if the list is still there (test for #314)
+		document.dispatchEvent(new Event('visibilitychange'));
+		await new Promise((r) => setTimeout(r, 500));
+		expect(citations).toHaveLength(5);
+		expect(citations[0]).toHaveTextContent("“Formate Assay in Body Fluids: Application in Methanol Poisoning,”");
 	});
 });
