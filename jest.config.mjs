@@ -27,7 +27,7 @@ export default {
         //   "**/?(*.)+(spec|test).[tj]s?(x)"
     ],
     transformIgnorePatterns: [
-        "/node_modules/(?!balanced-match)",
+        "/node_modules/(?!until-async|balanced-match|react-dnd|dnd-core|@react-dnd|dnd-multi-backend|rdndmb-html5-to-touch)",
         "\\.pnp\\.[^\\/]+$"
     ],
 };
