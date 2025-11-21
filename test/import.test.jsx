@@ -232,7 +232,7 @@ describe('Import', () => {
 		renderWithProviders(<Container />);
 		await waitFor(() => expect(getByText(screen.getByRole('region', { name: 'New item…' }), /1\./)).toBeInTheDocument(), { timeout: 3000 });
 		const bibliography = screen.getByRole("list", { name: "Bibliography" });
-		expect(getAllByRole(bibliography, 'listitem')).toHaveLength(1); // eslint-disable-line jest-dom/prefer-in-document
+		expect(getAllByRole(bibliography, 'listitem')).toHaveLength(1);  
 		expect(screen.getByRole('combobox', { name: "Citation Style", expanded: false })).toHaveTextContent(/Nature/);
 	});
 

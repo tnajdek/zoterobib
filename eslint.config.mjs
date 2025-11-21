@@ -13,6 +13,7 @@ export default [
 
 	// Project rules and plugin configs
 	{
+		files: ["**/*.{js,jsx}"],
 		languageOptions: {
 			globals: {
 				...globals.browser,

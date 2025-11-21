@@ -13,7 +13,7 @@ const Footer = props => {
 						id="zbib.footer.follow"
 						defaultMessage="Stay in touch! Follow <link>@zotero</link> on Twitter."
 						values={ {
-							link: chunk => <a href="https://twitter.com/zotero">{ chunk }</a> //eslint-disable-line react/display-name
+							link: chunk => <a href="https://twitter.com/zotero">{ chunk }</a>  
 						} }
 					/>
 				</nav> }

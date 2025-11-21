@@ -297,8 +297,8 @@ const Bibliography = props => {
 				if (ev.target.closest('.citation') === selection.anchorNode.parentNode.closest('.citation')) {
 					return;
 				}
-			} catch (_) {
-				// selection.anchorNode.parentNode might fail in which case we open the editor
+			} catch {
+				// selection.anchorNode.parentNode might fail, in which case we open the editor
 			}
 		}
 		if (!isReadOnly && itemId && isTriggerEvent(ev)) {

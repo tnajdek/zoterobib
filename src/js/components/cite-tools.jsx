@@ -44,7 +44,7 @@ const CiteTools = ({ identifier, isTranslating, onEditorOpen, onTranslationCance
 	}, [onTranslationRequest]);
 
 	useEffect(() => {
-		if(typeof(prevIdentifier !== 'undefined') && identifier !== prevIdentifier) {
+		if(typeof prevIdentifier !== 'undefined' && identifier !== prevIdentifier) {
 			setEntry(identifier);
 		}
 	}, [identifier, prevIdentifier]);

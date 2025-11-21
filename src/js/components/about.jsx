@@ -28,7 +28,7 @@ const About = ({ onGetStartedClick }) => (
 					trust it to help you seamlessly add sources and produce perfect bibliographies.
 					If you need to reuse sources across multiple projects or build a shared research
 					library, we recommend using Zotero instead."
-					values={ { link: chunk => <a href="https://www.zotero.org/">{ chunk }</a> }} //eslint-disable-line react/display-name
+					values={ { link: chunk => <a href="https://www.zotero.org/">{ chunk }</a> }}  
 				/>
 
 			</p>
@@ -139,7 +139,7 @@ const About = ({ onGetStartedClick }) => (
 										width="14"
 										height="14"
 										alt="Remove icon" />,
-									i: chunk => <i>{ chunk }</i>  //eslint-disable-line react/display-name
+									i: chunk => <i>{ chunk }</i>   
 								} }
 							/>
 						</p>
@@ -164,7 +164,7 @@ const About = ({ onGetStartedClick }) => (
 									Harvard, or any of the {citationStylesCount, plural, other {#+ other <link>CSL</link> styles} }."
 								values={ {
 									citationStylesCount: Math.floor(citationStylesCount / 1000) * 1000,
-									link: chunk => <a href="https://citationstyles.org/">{ chunk }</a> //eslint-disable-line react/display-name
+									link: chunk => <a href="https://citationstyles.org/">{ chunk }</a>  
 								} }
 							/>
 						</p>
@@ -268,8 +268,8 @@ const About = ({ onGetStartedClick }) => (
 					id="zbib.about.questionsFaq"
 					defaultMessage="<block>Still have questions?</block> Check the <link>FAQ</link>."
 					values={ {
-						block: chunk => <span className="d-xs-block d-sm-inline">{ chunk }</span>, //eslint-disable-line react/display-name
-						link: chunk => <a href="/faq">{ chunk }</a> //eslint-disable-line react/display-name
+						block: chunk => <span className="d-xs-block d-sm-inline">{ chunk }</span>,  
+						link: chunk => <a href="/faq">{ chunk }</a>  
 					} }
 				/>
 			</p>

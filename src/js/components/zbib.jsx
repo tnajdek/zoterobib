@@ -25,8 +25,8 @@ import StyleInstaller from './style-installer';
 import WhatsThis from './whats-this';
 
 const commonFormats = {
-	b: (chunks) => <b>{chunks}</b>, //eslint-disable-line react/display-name
-	i: (chunks) => <i>{chunks}</i>, //eslint-disable-line react/display-name
+	b: (chunks) => <b>{chunks}</b>,  
+	i: (chunks) => <i>{chunks}</i>,  
 };
 
 const titleCaseExample = 'Circadian Mood Variations in Twitter Content';
@@ -177,7 +177,7 @@ const ZBib = props => {
 							<FormattedMessage
 								id="zbib.confirmCase.sentenceCaseExample"
 								defaultMessage="<b>Sentence case:</b> <i>{ sentenceCaseExample }</i>"
-								values={ { ...commonFormats, sentenceCaseExample } } //eslint-disable-line react/display-name
+								values={ { ...commonFormats, sentenceCaseExample } }  
 							/>
 						</p>
 					</Confirmation>
@@ -208,7 +208,7 @@ const ZBib = props => {
 									Connector</a>, you can export your bibliography to Zotero by
 									clicking the “Save to Zotero” button in your browser’s toolbar."
 									values= { {
-										a: chunk => <a target="_blank" rel="noopener noreferrer" href="https://www.zotero.org/download/">{ chunk }</a> //eslint-disable-line react/display-name
+										a: chunk => <a target="_blank" rel="noopener noreferrer" href="https://www.zotero.org/download/">{ chunk }</a>  
 									} }
 								/>
 								</p>

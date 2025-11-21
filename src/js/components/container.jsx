@@ -634,7 +634,7 @@ const BibWebContainer = props => {
 				{ type: exportFormats[format].mime }
 			);
 			saveAs(file);
-		} catch(_) {
+		} catch {
 			// Old Edge & Safari, see #237
 			const blob = new Blob([fileContents], { type: exportFormats[format].mime });
 			saveAs(blob, fileName);
@@ -649,7 +649,7 @@ const BibWebContainer = props => {
 		};
 		dispatch({ type: POST_MESSAGE, message });
 		if(errorData) {
-			console.error(errorData); //eslint-disable-line no-console
+			console.error(errorData);
 		}
 	}, []);
 
@@ -723,7 +723,7 @@ const BibWebContainer = props => {
 					setCopySingleState({ citationKey: null, copied: false });
 				}, 1000);
 			}
-		} catch(_) {
+		} catch {
 			setCopySingleState({ citationKey: null, copied: false });
 		}
 	}, [getCopyData, state.bibliography.lookup]);
@@ -883,7 +883,7 @@ const BibWebContainer = props => {
 		if(itemUnderReview && itemUnderReview.key === itemKey) {
 			setItemUnderReview(updatedItem);
 		}
-	}, [handleError, itemUnderReview, state.isSentenceCaseStyle, state.meta]);
+	}, [itemUnderReview, state.isSentenceCaseStyle, state.meta]);
 
 	const handleMultipleChoiceCancel = useCallback(() => {
 		setActiveDialog(null);

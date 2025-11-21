@@ -87,7 +87,7 @@ const BibliographySection = props => {
 								id="zbib.bibliography.emptyTitle"
 								defaultMessage='<i>Y</i>our bibliography is empty.'
 								values={ {
-									i: chunks => <span style={{ 'letterSpacing': '-0.092em' }}>{chunks}</span>, //eslint-disable-line react/display-name
+									i: chunks => <span style={{ 'letterSpacing': '-0.092em' }}>{chunks}</span>,  
 								}}
 							/>
 						</h2>
@@ -97,7 +97,7 @@ const BibliographySection = props => {
 								id="zbib.bibliography.emptyLead"
 								defaultMessage='<i>T</i>o add a source, paste or type its URL, ISBN, DOI, PMID, arXiv ID, or title into the search box above'
 								values={ {
-									i: chunks => <span style={{ 'letterSpacing': '-0.111em' }}>{chunks}</span>, //eslint-disable-line react/display-name
+									i: chunks => <span style={{ 'letterSpacing': '-0.111em' }}>{chunks}</span>,  
 								}}
 							/>
 						</p>

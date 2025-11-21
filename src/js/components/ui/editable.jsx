@@ -41,12 +41,14 @@ EditableContent.displayName = 'EditableContent';
 
 EditableContent.propTypes = {
 	contentId: PropTypes.string,
-	title: PropTypes.string,
 	display: PropTypes.string,
+	id: PropTypes.string,
 	input: PropTypes.element,
 	inputComponent: PropTypes.elementType,
+	labelId: PropTypes.string,
 	options: PropTypes.array,
 	placeholder: PropTypes.string,
+	title: PropTypes.string,
 	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 

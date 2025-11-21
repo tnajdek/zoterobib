@@ -6,9 +6,6 @@
 export default {
     clearMocks: true,
     coverageProvider: "v8",
-    globals: {
-        // fetch: global.fetch,
-    },
     maxWorkers: "50%",
     moduleDirectories: [
         "src/js",
