@@ -8,6 +8,11 @@
 		padding-top: variables.$section-padding - 12px; // t height
 	}
 
+	#link-to-this-version {
+		// add offset for "what's this" icon + margin
+		margin-left: calc(16px + 7px);
+	}
+
 	.header-wrapper {
 		display: flex;
 		justify-content: center;
