@@ -86,7 +86,7 @@ describe('Editor', () => {
 			getAllByRole(bibliography, 'listitem')[0].querySelector('.csl-entry-container').innerHTML
 		).toEqual('Bose, K. S., and R. H. Sarma. “Delineation of the Intimate Details of the Backbone Conformation of Pyridine Nucleotide Coenzymes in Aqueous Solution.” <i>Biochemical and Biophysical Research Communications</i>, vol. 66, no. 4, Oct. 1975, pp. 1173–79. <i>PubMed</i>, https://doi.org/10.1016/0006-291x(75)90482-9.');
 		const styleSelector = screen.getByRole('combobox', { name: "Citation Style" });
-		expect(styleSelector).toHaveTextContent(/Modern Language Association/);
+		expect(styleSelector).toHaveTextContent(/MLA Handbook 9th edition \(in-text citations\)/);
 		await user.click(styleSelector);
 		const option = getByRole(getByRole(styleSelector, 'listbox'), 'option', { name: /Turabian/ });
 		await userEvent.click(option);
@@ -220,7 +220,7 @@ describe('Editor', () => {
 
 		// Switch to APA style, but cancel the dialog
 		await user.click(styleSelector);
-		await userEvent.click(getByRole(getByRole(styleSelector, 'listbox'), 'option', { name: /American Psychological Association/ }));
+		await userEvent.click(getByRole(getByRole(styleSelector, 'listbox'), 'option', { name: /APA Style 7th edition/ }));
 		let dialog = await screen.findByRole('dialog', { name: 'Converting Titles to Sentence Case' });
 		await userEvent.click(getByRole(dialog, 'button', { name: 'Cancel' }));
 		await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Converting Titles to Sentence Case' })).not.toBeInTheDocument());
@@ -229,7 +229,7 @@ describe('Editor', () => {
 
 		// Switch to APA style for real
 		await user.click(styleSelector);
-		await userEvent.click(getByRole(getByRole(styleSelector, 'listbox'), 'option', { name: /American Psychological Association/ }));
+		await userEvent.click(getByRole(getByRole(styleSelector, 'listbox'), 'option', { name: /APA Style 7th edition/ }));
 		dialog = await screen.findByRole('dialog', { name: 'Converting Titles to Sentence Case' });
 		await userEvent.click(getByRole(dialog, 'button', { name: 'OK, I’ll Edit Them' }));
 		await waitFor(() => expect(screen.queryByRole('dialog', { name: 'Converting Titles to Sentence Case' })).not.toBeInTheDocument());

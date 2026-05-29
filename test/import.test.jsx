@@ -175,7 +175,7 @@ describe('Import', () => {
 			'searchbox', { name: 'Enter a URL, ISBN, DOI, PMID, arXiv ID, or title' }
 		)).not.toHaveAttribute('readonly'));
 
-		expect(screen.getByRole('combobox', { name: "Citation Style", expanded: false })).toHaveTextContent(/Modern Language Association/);
+		expect(screen.getByRole('combobox', { name: "Citation Style", expanded: false })).toHaveTextContent(/MLA Handbook 9th edition \(in-text citations\)/);
 		const newItemSection = await screen.findByRole('region', { name: 'New item…' });
 		expect(getByText(newItemSection, /The Complete Golden Retriever Handbook/)).toBeInTheDocument();
 		expect(queryByText(newItemSection, /1\./)).not.toBeInTheDocument();
@@ -197,7 +197,7 @@ describe('Import', () => {
 			'searchbox', { name: 'Enter a URL, ISBN, DOI, PMID, arXiv ID, or title' }
 		)).not.toHaveAttribute('readonly'));
 
-		expect(screen.getByRole('combobox', { name: "Citation Style", expanded: false })).toHaveTextContent(/Modern Language Association/);
+		expect(screen.getByRole('combobox', { name: "Citation Style", expanded: false })).toHaveTextContent(/MLA Handbook 9th edition \(in-text citations\)/);
 		const newItemSection = await screen.findByRole('region', { name: 'New item…' });
 		expect(getByText(newItemSection, /The Complete Golden Retriever Handbook/)).toBeInTheDocument();
 		expect(queryByText(newItemSection, /1\./)).not.toBeInTheDocument();
@@ -218,7 +218,7 @@ describe('Import', () => {
 			'searchbox', { name: 'Enter a URL, ISBN, DOI, PMID, arXiv ID, or title' }
 		)).not.toHaveAttribute('readonly'));
 
-		expect(screen.getByRole('combobox', { name: "Citation Style", expanded: false })).toHaveTextContent(/Modern Language Association/);
+		expect(screen.getByRole('combobox', { name: "Citation Style", expanded: false })).toHaveTextContent(/MLA Handbook 9th edition \(in-text citations\)/);
 		const newItemSection = await screen.findByRole('region', { name: 'New item…' });
 		expect(getByText(newItemSection, /The Complete Golden Retriever Handbook/)).toBeInTheDocument();
 		expect(queryByText(newItemSection, /1\./)).not.toBeInTheDocument();
