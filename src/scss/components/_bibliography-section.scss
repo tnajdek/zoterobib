@@ -149,21 +149,10 @@
 				}
 			}
 
-			&.single {
-				.select-value-label {
-					overflow: inherit;
-					text-overflow: inherit;
-					white-space: inherit;
-				}
-			}
-
 			.select-value {
 				position: static;
+				min-width: 0;
 				padding: 0;
-			}
-
-			.select-input {
-				position: absolute;
 			}
 
 			.select-arrow-container {
