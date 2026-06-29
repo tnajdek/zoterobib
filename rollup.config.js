@@ -19,7 +19,6 @@ const config = {
 	input: './src/js/main.js',
 	external: [
 		'/static/js/citeproc-rs/citeproc_rs_wasm.js',
-		'cross-fetch/polyfill',
 		'jsdom',	// zotero-utilities/utilities.js:619 includes jsdom which is then
 					// treeshaken because we replace Zotero.isNode to false. To avoid
 					// bogus imports/warnings it also needs to be marked as external.

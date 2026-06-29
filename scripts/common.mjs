@@ -1,4 +1,3 @@
-import fetch from 'cross-fetch';
 import fs from 'fs-extra';
 
 export async function fetchIfNeeded(url, path, cacheTime) {

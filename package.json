@@ -98,7 +98,6 @@
     "cheerio": "1.2.0",
     "citeproc": "2.4.63",
     "config": "4.4.2",
-    "cross-fetch": "4.1.0",
     "cssnano": "8.0.2",
     "eslint": "9.39.4",
     "eslint-plugin-jest-dom": "5.5.0",
