@@ -30,6 +30,7 @@ export const uninstallMockedXHR = () => {
 export const installMockedXHR = () => {
 	Reflect.deleteProperty(window, 'XMLHttpRequest');
 	Reflect.defineProperty(window, 'XMLHttpRequest', {
+		configurable: true,
 		writable: true,
 		enumerable: true,
 		value: class XMLHttpRequest {

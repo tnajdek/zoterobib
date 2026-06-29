@@ -1,8 +1,6 @@
 const presets = [
 	["@babel/preset-env", {
 		"debug": !!process.env.DEBUG || false,
-		"corejs": { version: 3 },
-		"useBuiltIns": "usage",
 	}],
 	['@babel/preset-react', {
 		'runtime': 'automatic',
@@ -12,7 +10,10 @@ const presets = [
 ];
 
 const plugins = [
-	["formatjs", { removeDefaultMessage: !!process.env.NODE_ENV?.startsWith('prod') }]
+	["babel-plugin-polyfill-corejs3", {
+		"method": "usage-global",
+		"version": "3.49",
+	}],
 ];
 
 

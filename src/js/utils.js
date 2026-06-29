@@ -1,4 +1,4 @@
-import balanced from 'balanced-match';
+import { balanced } from 'balanced-match';
 import { CiteprocWrapper } from 'web-common/cite';
 
 import ZoteroBib from './zotero-translation-client';

@@ -457,6 +457,41 @@ const BibWebContainer = props => {
 		dispatch({ type: COMPLETE_REFRESH_BIBLIOGRAPHY, lookup, items });
 	}, [state.styleHasBibliography, state.bibliography]);
 
+	const displayFirstCitationMessage = useCallback(() => {
+		const message = {
+			action: 'Read More',
+			id: getNextMessageId(),
+			kind: 'FIRST_CITATION',
+			message: 'Your first citation has been added. Citations are stored locally in your browser.',
+			href: '/faq#where-is-my-bibliography-stored'
+		};
+		dispatch({ type: REPLACE_MESSAGE, kind: 'WELCOME_MESSAGE', message });
+	}, []);
+
+	const handleReorderCitations = useCallback((srcItemKey, targetItemKey, placeBefore = false) => {
+		const reorderedItems = [...bib.current.itemsRaw];
+		const srcItemIndex = reorderedItems.findIndex(i => i.key === srcItemKey);
+		const srcItem = reorderedItems.splice(srcItemIndex, 1).pop();
+		const targetItemIndex = reorderedItems.findIndex(i => i.key === targetItemKey);
+		const effectiveTargetItemIndex = targetItemIndex + (placeBefore ? 0 : 1);
+		reorderedItems.splice(effectiveTargetItemIndex, 0, srcItem);
+
+		bib.current = new ZoteroBib({
+			...config,
+			initialItems: reorderedItems,
+			override: true,
+		});
+		citeproc.current.resetReferences(ensureNoBlankItems(bib.current.itemsCSL));
+		if (!state.styleHasBibliography) {
+			citeproc.current.initClusters(
+				bib.current.itemsRaw.map(item => ({ id: item.key, cites: [{ id: item.key }] }))
+			);
+			citeproc.current.setClusterOrder(bib.current.itemsRaw.map(item => ({ id: item.key })));
+		}
+
+		dispatch({ type: BIBLIOGRAPHY_SOURCE_CHANGED });
+	}, [config, state.styleHasBibliography]);
+
 	const addItem = useCallback((item, showFirstCitationMessage = true, index = null)  => {
 		duplicate.current = isDuplicate(item, bib.current.itemsRaw);
 		if(duplicate.current) {
@@ -506,17 +541,6 @@ const BibWebContainer = props => {
 		}
 	}, [state.styleHasBibliography]);
 
-	const displayFirstCitationMessage = useCallback(() => {
-		const message = {
-			action: 'Read More',
-			id: getNextMessageId(),
-			kind: 'FIRST_CITATION',
-			message: 'Your first citation has been added. Citations are stored locally in your browser.',
-			href: '/faq#where-is-my-bibliography-stored'
-		};
-		dispatch({ type: REPLACE_MESSAGE, kind: 'WELCOME_MESSAGE', message });
-	}, []);
-
 	const displayWelcomeMessage = useCallback(() => {
 		const message = {
 			action: 'Read More',
@@ -532,6 +556,18 @@ const BibWebContainer = props => {
 		const newStyleMeta = stylesData.find(sd => sd.name === styleName);
 		setCitationStyles(getExpandedCitationStyles(citationStyles, newStyleMeta));
 	}, [citationStyles, config.stylesURL]);
+
+	const handleError = useCallback((errorMessage, errorData) => {
+		const message = {
+			id: getNextMessageId(),
+			kind: 'ERROR',
+			message: errorMessage,
+		};
+		dispatch({ type: POST_MESSAGE, message });
+		if(errorData) {
+			console.error(errorData);
+		}
+	}, []);
 
 	const fetchRemoteBibliography = useCallback(async () => {
 		try {
@@ -640,18 +676,6 @@ const BibWebContainer = props => {
 			saveAs(blob, fileName);
 		}
 	}, [handleError, state.xml, state.styleHasBibliography]);
-
-	const handleError = useCallback((errorMessage, errorData) => {
-		const message = {
-			id: getNextMessageId(),
-			kind: 'ERROR',
-			message: errorMessage,
-		};
-		dispatch({ type: POST_MESSAGE, message });
-		if(errorData) {
-			console.error(errorData);
-		}
-	}, []);
 
 	const handleCitationStyleChanged = useCallback(async newCitationStyle => {
 		dispatch({ type: CLEAR_ALL_MESSAGES });
@@ -792,30 +816,6 @@ const BibWebContainer = props => {
 		setTitle('');
 		dispatch({ type: BIBLIOGRAPHY_SOURCE_CHANGED });
 	}, [state.styleHasBibliography]);
-
-	const handleReorderCitations = useCallback((srcItemKey, targetItemKey, placeBefore = false) => {
-		const reorderedItems = [...bib.current.itemsRaw];
-		const srcItemIndex = reorderedItems.findIndex(i => i.key === srcItemKey);
-		const srcItem = reorderedItems.splice(srcItemIndex, 1).pop();
-		const targetItemIndex = reorderedItems.findIndex(i => i.key === targetItemKey);
-		const effectiveTargetItemIndex = targetItemIndex + (placeBefore ? 0 : 1);
-		reorderedItems.splice(effectiveTargetItemIndex, 0, srcItem);
-
-		bib.current = new ZoteroBib({
-			...config,
-			initialItems: reorderedItems,
-			override: true,
-		});
-		citeproc.current.resetReferences(ensureNoBlankItems(bib.current.itemsCSL));
-		if (!state.styleHasBibliography) {
-			citeproc.current.initClusters(
-				bib.current.itemsRaw.map(item => ({ id: item.key, cites: [{ id: item.key }] }))
-			);
-			citeproc.current.setClusterOrder(bib.current.itemsRaw.map(item => ({ id: item.key })));
-		}
-
-		dispatch({ type: BIBLIOGRAPHY_SOURCE_CHANGED });
-	}, [config, state.styleHasBibliography]);
 
 	const handleDismiss = useCallback(id => {
 		const message = state.messages.find(m => m.id === id);

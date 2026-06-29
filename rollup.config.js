@@ -90,7 +90,7 @@ if(isProduction) {
 	config.plugins.splice(0, 0, alias({
 		entries: [...commonAliases, {
 			find: '@formatjs/icu-messageformat-parser',
-			replacement: '@formatjs/icu-messageformat-parser/no-parser'
+			replacement: '@formatjs/icu-messageformat-parser/no-parser.js'
 		}]
 	}));
 	config.plugins.push(terser({ safari10: true }));
