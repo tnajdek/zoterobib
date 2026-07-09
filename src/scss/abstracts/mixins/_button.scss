@@ -3,15 +3,15 @@
 // stylelint-disable nesting-selector-no-missing-scoping-root
 
 @mixin button-variant($color, $outline: null, $inverse: null) {
-	$btn-color: if($inverse, variables.$shade-0, $color);
-	$shade-0: if($inverse, $color, variables.$shade-0);
+	$btn-color: if(sass($inverse): variables.$shade-0; else: $color);
+	$shade-0: if(sass($inverse): $color; else: variables.$shade-0);
 
-	background-color: if($outline, transparent, $btn-color);
-	border-color: if($outline, $btn-color, transparent);
+	background-color: if(sass($outline): transparent; else: $btn-color);
+	border-color: if(sass($outline): $btn-color; else: transparent);
 
 	&,
 	.icon {
-		color: if($outline, $btn-color, $shade-0);
+		color: if(sass($outline): $btn-color; else: $shade-0);
 	}
 
 	&:hover {
@@ -26,7 +26,7 @@
 
 	&:active {
 		background-color: color.adjust($btn-color, $lightness: -8%);
-		border-color: if($outline, color.adjust($btn-color, $lightness: -8%), transparent);
+		border-color: if(sass($outline): color.adjust($btn-color, $lightness: -8%); else: transparent);
 		box-shadow: none;
 
 		&,
@@ -36,13 +36,13 @@
 	}
 
 	&:disabled {
-		background-color: if($outline, transparent, $btn-color);
-		border-color: if($outline, $btn-color, transparent);
+		background-color: if(sass($outline): transparent; else: $btn-color);
+		border-color: if(sass($outline): $btn-color; else: transparent);
 		box-shadow: none;
 
 		&,
 		.icon {
-			color: if($outline, $btn-color, $shade-0);
+			color: if(sass($outline): $btn-color; else: $shade-0);
 		}
 	}
 
