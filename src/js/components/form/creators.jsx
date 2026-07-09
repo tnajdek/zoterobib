@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import deepEqual from 'deep-equal';
+import deepEqual from 'fast-deep-equal';
 import PropTypes from 'prop-types';
 import { Fragment, memo, useCallback, useEffect, useMemo, useRef, useState, createRef } from 'react';
 import CSSTransition from 'react-transition-group/cjs/CSSTransition';
